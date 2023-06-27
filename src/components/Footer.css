@@ -1,0 +1,19 @@
+footer {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    padding-top: 100px;
+}
+
+.logo{
+    width: 32x;
+    height: 32px;
+    padding-left: 15px;
+    cursor: pointer;
+}
+
+.logo:hover{
+    filter: invert(48%) brightness(110%) contrast(119%);
+}
