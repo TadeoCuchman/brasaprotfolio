@@ -24,6 +24,7 @@ function Home() {
 
   useEffect(() => {
     const apiKey = import.meta.env.VITE_GOOGLE_DRIVE_API_KEY;
+    console.log(apiKey)
 
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/1S43Co3DdvwBTsYYumHx_NxQ2X5N-PfzXSO0b1aObQkg/values/A1%3AC100?majorDimension=ROWS&fields=values&key=${apiKey}`, {
       headers: {
