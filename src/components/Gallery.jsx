@@ -35,13 +35,13 @@ const Gallery = ({pathName, photos}) => {
       </div>
        <ul className="imagesList">
          {photos.map((photo) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name} onClick={(e) => {
-         
-          let allImages = document.querySelector('.imagesList').children;
-          for (var i = 0; i < allImages.length; i++) {
-            allImages[i].classList.add('noSelected')
-          }
-          
-          if(selectedImg.url !== photo.url){
+           if(selectedImg.url !== photo.url){
+            
+             let allImages = document.querySelector('.imagesList').children;
+             for (var i = 0; i < allImages.length; i++) {
+               allImages[i].classList.add('noSelected')
+             }
+             
             e.target.classList.remove('noSelected')
             changeImage()
             setTimeout(() => {
