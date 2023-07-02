@@ -4,7 +4,6 @@
     align-items: center;
     flex-direction: column;
     padding: 60px;
-    justify-content: space-between;
     min-height: 700px;
 
 }
@@ -30,28 +29,22 @@
     width: 100%; 
     height: auto; 
     max-height: 85vh;
+    transition: opacity 0.4s;
 }
 
-/* #mainImg {
-    opacity: 1;
-    animation-name: fadeOut;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-  }
-  
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  } */
+.hide {
+  opacity: 0;
+}
 
 .littlePhoto {
     height: 20px;
     width: auto;
     cursor: pointer;
+}
+
+.noSelected {
+  filter:blur();
+  filter:opacity(30%)
+  
 }
 
