@@ -3,20 +3,20 @@ import { useEffect, useState } from "react";
 import './Gallery.css'
 
 
-const Gallery = ({pathName, photos}) => {
+const Gallery = ({photos}) => {
   
   const [selectedImg, setSelectedImg] = useState({ })
 
   useEffect(() => { 
-    setSelectedImg(photos[0])
-    let firstImage = document.querySelector('.imagesList').children[0];
-    firstImage.classList.remove('noSelected')
-  },[])
+    if(photos.length > 0) {
+      setSelectedImg(photos[0])
+      let firstImage = document.querySelector('.imagesList').children[0];
+      firstImage.classList.remove('noSelected')
+    }
+  },[photos])
 
-  useEffect(() => {
-    photos.filter(photo => photo.album == pathName )
-  },[pathName])
 
+  
   function changeImage() {
     var image = document.getElementById('mainImg');
     image.classList.add('hide');
