@@ -16,7 +16,7 @@ const Gallery = ({photos}) => {
   },[photos])
 
 
-  
+
   function changeImage() {
     var image = document.getElementById('mainImg');
     image.classList.add('hide');
@@ -30,11 +30,12 @@ const Gallery = ({photos}) => {
 
   return (
     <div id='gallery'>
-      <div className="imgcontainer">
+      <div style={{height:'87vh'}}>
        <img id='mainImg' src={selectedImg.url} alt={selectedImg.name} />
       </div>
        <ul className="imagesList">
-         {photos.map((photo) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name} onClick={(e) => {
+         {photos.map((photo) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name} 
+         onClick={(e) => {
            if(selectedImg.url !== photo.url){
             
              let allImages = document.querySelector('.imagesList').children;

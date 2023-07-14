@@ -16,7 +16,16 @@ function Home({photos}) {
     console.log(filteredPhotos);
 
     console.log(location.pathname);
+
+    window.scrollTo(0, 170); // Scroll to 500 pixels from the top
+ 
+
   }, [location.pathname, photos])
+
+  useEffect( () => {
+    console.log( window.scrollY);
+
+  },[ window.scrollY] )
 
 
 
