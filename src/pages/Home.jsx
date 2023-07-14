@@ -3,8 +3,9 @@ import { useLocation } from "react-router-dom";
 import Gallery from "../components/Gallery"
 
 
-function Home({photos}) {
+function Home({photos, setLoading, loading}) {
   const [filteredPhotos, setFilteredPhotos] = useState([])
+
   const location = useLocation();
 
 
@@ -17,22 +18,14 @@ function Home({photos}) {
 
     console.log(location.pathname);
 
-    window.scrollTo(0, 170); // Scroll to 500 pixels from the top
- 
-
   }, [location.pathname, photos])
-
-  useEffect( () => {
-    console.log( window.scrollY);
-
-  },[ window.scrollY] )
 
 
 
   return (
     <div className='App'>
-  
-      {photos.length > 1 ? <Gallery photos={filteredPhotos} /> : ''} 
+      
+      <Gallery photos={filteredPhotos} setLoading={setLoading} loading={loading}/> 
 
     </div>
   )

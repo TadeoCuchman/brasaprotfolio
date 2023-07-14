@@ -10,6 +10,7 @@ import './App.css'
 const App = () => {
   const [photos, setPhotos] = useState([]);
   const [titles, setTitles] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   function convertArrayToObject(arr) {
     const headers = arr[0];
@@ -75,11 +76,10 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header titles={titles} />
+      <Header titles={titles} setLoading={setLoading} loading={loading}/>
       <Routes>
-        <Route path="/" element={<Home photos={photos}/>} />
+        <Route path="/*" element={<Home photos={photos} setLoading={setLoading} loading={loading}/>} />
         <Route path="/about" element={<About />} />
-        <Route path="*" element={<Home photos={photos}/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

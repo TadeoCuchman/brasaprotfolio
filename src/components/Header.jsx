@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import './Header.css'
 import {Link, useNavigate} from "react-router-dom"
 
-const Header = ({titles}) => {
+const Header = ({titles, setLoading}) => {
 
   return (
     <header>
@@ -15,7 +15,7 @@ const Header = ({titles}) => {
             </Link>
             {
                 titles.map((title, index) => {
-                   return <NewLink key={index} title={title}/>
+                   return <NewLink key={index} setLoading={setLoading} title={title}/>
                 })
             }
             <Link to='about'>
@@ -26,7 +26,7 @@ const Header = ({titles}) => {
   )
 };
 
-const NewLink = ({title}) => {
+const NewLink = ({title, setLoading}) => {
     const [subMenu, setSubMenu] = useState(false)
     const navigate = useNavigate();
 
@@ -43,22 +43,27 @@ const NewLink = ({title}) => {
             if(title.subpaginas.length == 0){
                 navigate(title.path)
                 setSubMenu(false);
+                setLoading(true)
             }
 
         }}>
         <li style={subMenu ? {color:'black'} : {}}>{title.pagina}</li>
-        {subMenu ? <SubMenu titles={title.subpaginas} setSubMenu={setSubMenu}/> : ''}
+        {subMenu ? <SubMenu titles={title.subpaginas} setLoading={setLoading} navigate={navigate}/> : ''}
         </div>
     )
 }
 
-const SubMenu = ({titles, setSubMenu}) => {
+const SubMenu = ({titles, navigate, setLoading}) => {
+
 
     return (
         <ul className="subMenu">
             {
                 titles.map((title, index) => {
-                    return <Link to={title.path} key={index}><li> {title.subpagina} </li></Link>
+                    return <li  key={index} onClick={() =>{
+                        navigate(title.path)
+                        setLoading(true)}}
+                    > {title.subpagina} </li>
                 })
             }
         </ul>

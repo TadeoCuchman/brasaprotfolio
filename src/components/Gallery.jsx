@@ -1,13 +1,16 @@
 import React from "react"
 import { useEffect, useState } from "react";
 import './Gallery.css'
+import gif from '../../public/cartoon.gif'
 
 
-const Gallery = ({photos}) => {
+
+const Gallery = ({photos, setLoading, loading}) => {
   
   const [selectedImg, setSelectedImg] = useState({ })
 
-  useEffect(() => { 
+  useEffect(() => {
+
     if(photos.length > 0) {
       setSelectedImg(photos[0])
       let firstImage = document.querySelector('.imagesList').children[0];
@@ -30,8 +33,11 @@ const Gallery = ({photos}) => {
 
   return (
     <div id='gallery'>
+      {loading ? <img src={gif} style={{ height:'200px', width:'auto' }}></img> : ''}
       <div style={{height:'87vh'}}>
-       <img id='mainImg' src={selectedImg.url} alt={selectedImg.name} />
+       <img id='mainImg' style={loading ? { display:'none'} : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={() => {
+        setLoading(false)
+        }}/>
       </div>
        <ul className="imagesList">
          {photos.map((photo) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name} 
