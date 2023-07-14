@@ -15,8 +15,6 @@
     gap: 5px;
 } 
 
-
-
 .imgcontainder {
     width: 80%;
     height: auto; 
@@ -35,7 +33,7 @@
 }
 
 .littlePhoto {
-    height: 20px;
+    height: 27px;
     width: auto;
     cursor: pointer;
 }
