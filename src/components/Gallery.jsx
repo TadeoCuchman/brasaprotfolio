@@ -4,62 +4,126 @@ import './Gallery.css'
 import gif from '../../public/cartoon.gif'
 
 
+function changeImage() {
+  var image = document.getElementById('mainImg');
+  image.classList.add('hide');
 
-const Gallery = ({photos, setLoading, loading}) => {
-  
-  const [selectedImg, setSelectedImg] = useState({ })
+  setTimeout(function () {
+    image.classList.remove('hide');
+  }, 1000); // Adjust the delay here to match the fade-out duration in CSS
+}
+
+const Gallery = ({ photos, setLoading, loading }) => {
+
+  const [selectedImg, setSelectedImg] = useState({})
+  const [photoIndex, setPhotoIndex] = useState(0)
+
+  const handleKeyPress = (event) => {
+    if (event.key === "ArrowRight") {
+      const nextButton = document.querySelector(".nextButton");
+      if (nextButton) {
+        nextButton.click();
+      }
+    } else if (event.key === "ArrowLeft") {
+      const beforeButton = document.querySelector(".beforeButton");
+      if (beforeButton) {
+        beforeButton.click();
+      }
+    }
+  };
 
   useEffect(() => {
 
-    if(photos.length > 0) {
-      setSelectedImg(photos[0])
+    if (photos.length > 0) {
+      setSelectedImg({ ...photos[0], index: 0 })
       let firstImage = document.querySelector('.imagesList').children[0];
       firstImage.classList.remove('noSelected')
     }
-  },[photos])
 
-
-
-  function changeImage() {
-    var image = document.getElementById('mainImg');
-    image.classList.add('hide');
-  
-    setTimeout(function() {
-      image.classList.remove('hide');
-    }, 1000); // Adjust the delay here to match the fade-out duration in CSS
-  }
-
-  
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [photos])
 
   return (
     <div id='gallery'>
-      {loading ? <img src={gif} style={{ height:'200px', width:'auto' }}></img> : ''}
-      <div style={{height:'87vh'}}>
-       <img id='mainImg' style={loading ? { display:'none'} : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={() => {
-        setLoading(false)
-        }}/>
+      {loading ? <img src={gif} style={{ height: '200px', width: 'auto' }}></img> : ''}
+      <div style={{ height: '87vh', position: 'relative' }}>
+        <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
+        <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
+        <img id='mainImg' style={loading ? { display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={() => {
+          setLoading(false)
+        }} />
       </div>
-       <ul className="imagesList">
-         {photos.map((photo) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name} 
-         onClick={(e) => {
-           if(selectedImg.url !== photo.url){
-            
-             let allImages = document.querySelector('.imagesList').children;
-             for (var i = 0; i < allImages.length; i++) {
-               allImages[i].classList.add('noSelected')
-             }
-             
-            e.target.classList.remove('noSelected')
-            changeImage()
-            setTimeout(() => {
-              setSelectedImg({url:photo.url, name:photo.name})
-            },400)
-          }
-          }}/>)
-          } 
+      <ul className="imagesList">
+        {photos.map((photo, index) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name}
+          onClick={(e) => {
+            if (selectedImg.url !== photo.url) {
+
+              let allImages = document.querySelector('.imagesList').children;
+              for (var i = 0; i < allImages.length; i++) {
+                allImages[i].classList.add('noSelected')
+              }
+
+              e.target.classList.remove('noSelected')
+              changeImage()
+              setTimeout(() => {
+                setSelectedImg({ url: photo.url, name: photo.name, index: index })
+              }, 400)
+            }
+          }} />)
+        }
       </ul>
     </div>
   )
 };
+
+const NextButton = ({ selectedImg, setSelectedImg, photos }) => {
+  const lastIndex = photos.length - 1;
+  const newIndex = selectedImg.index == lastIndex ? 0 : selectedImg.index + 1;
+  const nextPhoto = photos[newIndex];
+
+  return (
+    <div className="nextButton" style={{ position: 'absolute', width: '50%', height: '100%', right: '0', top: '0', opacity: '0%' }} onClick={() => {
+      let allImages = document.querySelector('.imagesList').children;
+      for (var i = 0; i < allImages.length; i++) {
+        allImages[i].classList.add('noSelected');
+      }
+      allImages[newIndex].classList.remove('noSelected');
+
+      changeImage()
+      setTimeout(() => {
+        setSelectedImg({ url: nextPhoto.url, name: nextPhoto.name, index: newIndex })
+      }, 400)
+    }}>
+      {'>'}
+    </div>
+  )
+}
+
+const BeforeButton = ({ selectedImg, setSelectedImg, photos }) => {
+  const lastIndex = photos.length - 1;
+  const newIndex = selectedImg.index == 0 ? lastIndex : selectedImg.index - 1;
+  const nextPhoto = photos[newIndex];
+
+
+  return (
+    <div className="beforeButton" style={{ position: 'absolute', width: '50%', height: '100%', left: '0', top: '0', opacity: '0%' }} onClick={() => {
+      let allImages = document.querySelector('.imagesList').children;
+      for (var i = 0; i < allImages.length; i++) {
+        allImages[i].classList.add('noSelected');
+      }
+      allImages[newIndex].classList.remove('noSelected');
+
+      changeImage()
+      setTimeout(() => {
+        setSelectedImg({ url: nextPhoto.url, name: nextPhoto.name, index: newIndex })
+      }, 400)
+    }}>
+      {'<'}
+    </div>
+  )
+}
 
 export default Gallery;

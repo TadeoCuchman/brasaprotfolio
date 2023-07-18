@@ -62,8 +62,7 @@ const App = () => {
       .then(data => {
         console.log(data.values);
         setPhotos(convertArrayToObject(data.values));
-        setTitles(getUniqueHeadersValues(convertArrayToObject(data.values)));
-    
+        setTitles(getUniqueHeadersValues(convertArrayToObject(data.values)));    
 
       })
       .catch(error => {
