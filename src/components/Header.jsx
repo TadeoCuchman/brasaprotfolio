@@ -18,7 +18,7 @@ const Header = ({ titles, setLoading }) => {
             <h1>
                 mateobraselli
             </h1>
-            <h5>Photografy</h5>
+            <h5>Photographer</h5>
             <ul>
                 {
                     titles.map((title, index) => {

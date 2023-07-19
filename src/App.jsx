@@ -51,7 +51,6 @@ const App = () => {
   useEffect(() => {
     const apiKey = import.meta.env.VITE_GOOGLE_DRIVE_API_KEY;
     const sheetId = import.meta.env.VITE_GOOGLE_SHEET_ID;
-    console.log(apiKey)
 
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A1%3AE?majorDimension=ROWS&fields=values&key=${apiKey}`, {
       headers: {
@@ -60,7 +59,6 @@ const App = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data.values);
         setPhotos(convertArrayToObject(data.values));
         setTitles(getUniqueHeadersValues(convertArrayToObject(data.values)));    
 
