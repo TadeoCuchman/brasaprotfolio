@@ -10,7 +10,7 @@ import './App.css'
 const App = () => {
   const [photos, setPhotos] = useState([]);
   const [titles, setTitles] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   function convertArrayToObject(arr) {
     const headers = arr[0];

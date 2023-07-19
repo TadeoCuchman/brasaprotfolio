@@ -1,7 +1,7 @@
 import React from "react"
 import { useEffect, useState } from "react";
 import './Gallery.css'
-import gif from '../../public/cartoon.gif'
+import gif from '/cartoon.gif'
 
 
 function changeImage() {
@@ -48,36 +48,40 @@ const Gallery = ({ photos, setLoading, loading }) => {
 
   return (
     <div id='gallery'>
-      {loading ? <img src={gif} style={{ height: '200px', width: 'auto' }}></img> : ''}
-      <div style={{ height: '87vh', position: 'relative' }}>
-        <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
-        <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
+      {loading ? <Gif/> : ''}
+        <div style={{ height: '87vh', position: 'relative' }}>
+          <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
+          <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
         <img id='mainImg' style={loading ? { display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={() => {
           setLoading(false)
         }} />
       </div>
       <ul className="imagesList">
-        {photos.map((photo, index) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name}
-          onClick={(e) => {
-            if (selectedImg.url !== photo.url) {
+          {photos.map((photo, index) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name}
+            onClick={(e) => {
+              if (selectedImg.url !== photo.url) {
 
-              let allImages = document.querySelector('.imagesList').children;
-              for (var i = 0; i < allImages.length; i++) {
-                allImages[i].classList.add('noSelected')
+                let allImages = document.querySelector('.imagesList').children;
+                for (var i = 0; i < allImages.length; i++) {
+                  allImages[i].classList.add('noSelected')
+                }
+
+                e.target.classList.remove('noSelected')
+                changeImage()
+                setTimeout(() => {
+                  setSelectedImg({ url: photo.url, name: photo.name, index: index })
+                }, 400)
               }
-
-              e.target.classList.remove('noSelected')
-              changeImage()
-              setTimeout(() => {
-                setSelectedImg({ url: photo.url, name: photo.name, index: index })
-              }, 400)
-            }
-          }} />)
-        }
-      </ul>
+            }} />)
+          }
+        </ul>
     </div>
   )
 };
+
+const Gif = () => {
+  return (<img src={gif} style={{ marginTop: '100px', marginBottom: '100px', height: '200px', width: 'auto' }}></img>)
+}
 
 const NextButton = ({ selectedImg, setSelectedImg, photos }) => {
   const lastIndex = photos.length - 1;

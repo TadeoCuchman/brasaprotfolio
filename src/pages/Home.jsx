@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom";
 import Gallery from "../components/Gallery"
-import gif from '../../public/cartoon.gif'
 
 
 function Home({photos, setLoading, loading}) {
@@ -14,7 +13,7 @@ function Home({photos, setLoading, loading}) {
   
   useEffect(() => {
     setFilteredPhotos(photos.filter(item => item.path == location.pathname));
-    window.scrollTo(0, 140); 
+    window.scrollTo(0, 150); 
   }, [location.pathname, photos])
 
 

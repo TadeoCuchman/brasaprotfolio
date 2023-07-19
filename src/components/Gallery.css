@@ -15,12 +15,6 @@
     gap: 5px;
 } 
 
-.imgcontainder {
-    width: 80%;
-    height: 800px;
-    margin-bottom: 20px;
-}
-
 #mainImg {
     width: 100%; 
     height: auto; 
