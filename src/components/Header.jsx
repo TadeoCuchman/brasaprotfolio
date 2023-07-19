@@ -9,7 +9,6 @@ const Header = ({ titles, setLoading }) => {
     useEffect(() => {
 
         if(titles.length > 0) {
-            console.log(titles)
             navigate(titles[0].path)
         }
     }, [titles])
