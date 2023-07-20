@@ -8,7 +8,7 @@ const Header = ({ titles, setLoading }) => {
 
     useEffect(() => {
 
-        if(titles.length > 0) {
+        if (titles.length > 0) {
             navigate(titles[0].path)
         }
     }, [titles])
@@ -37,13 +37,16 @@ const NewLink = ({ title, setLoading, navigate }) => {
     const [subMenu, setSubMenu] = useState(false)
 
     return (
-        <div onMouseEnter={(e) => {
-            if (title.subpaginas.length > 0) {
-                setSubMenu(true);
-            }
-        }}
+        <div style={{ position: 'relative' }}
+            onMouseEnter={(e) => {
+                if (title.subpaginas.length > 0) {
+                    setSubMenu(true);
+                }
+            }}
             onMouseLeave={(e) => {
-                setSubMenu(false);
+                if (title.subpaginas.length > 0) {
+                    setSubMenu(false);
+                }
             }}
             onClick={() => {
                 if (title.subpaginas.length == 0) {
