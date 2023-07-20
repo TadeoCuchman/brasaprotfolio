@@ -13,7 +13,7 @@ function Home({photos, setLoading, loading}) {
   
   useEffect(() => {
     setFilteredPhotos(photos.filter(item => item.path == location.pathname));
-    window.scrollTo(0, 150); 
+    window.scrollTo(0, 190); 
   }, [location.pathname, photos])
 
 
