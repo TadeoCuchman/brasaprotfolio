@@ -46,13 +46,16 @@ header a{
 .subMenu {
     position: absolute;
     display: flex;
+    left: 50%; /* Set the left position to 50% of the parent's width */
+    transform: translateX(-50%); /* Use translateX to adjust the position to center only on the X-axis */
     flex-direction: column;
-    text-align: letf;
+    text-align: center;
     height: auto;
     width: 200px;
     background-color: rgba(255, 255, 255, 0.816);
     border-radius: 10px;
     z-index: 1000;
+ 
 }
 .subMenu li {
     font-size: 17px;

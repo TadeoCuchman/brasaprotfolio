@@ -52,8 +52,12 @@ const Gallery = ({ photos, setLoading, loading }) => {
         <div style={{position: 'relative' }}>
           <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
           <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
-        <img id='mainImg' style={loading ? { display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={() => {
+        <img id='mainImg' style={loading ? { minHeigth: '80vh',display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={(e) => {
           setLoading(false)
+          setTimeout(() => {
+            const rect = e.target.getBoundingClientRect()
+            window.scrollTo(0, rect.top - 20); 
+          }, 100)
         }} />
       </div>
       <ul className="imagesList">
