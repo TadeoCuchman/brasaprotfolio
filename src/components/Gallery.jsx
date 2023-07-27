@@ -44,7 +44,13 @@ const Gallery = ({ photos, setLoading, loading }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
+
   }, [photos])
+
+  useEffect(() => {
+      const rect = document.getElementById('mainImg').getBoundingClientRect()
+      window.scrollTo(0, rect.top - 20); 
+  },[loading])
 
   return (
     <div id='gallery'>
@@ -54,10 +60,6 @@ const Gallery = ({ photos, setLoading, loading }) => {
           <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
         <img id='mainImg' style={loading ? { minHeigth: '80vh',display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={(e) => {
           setLoading(false)
-          setTimeout(() => {
-            const rect = e.target.getBoundingClientRect()
-            window.scrollTo(0, rect.top - 20); 
-          }, 100)
         }} />
       </div>
       <ul className="imagesList">
