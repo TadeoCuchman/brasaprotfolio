@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="about">
       <div className="imgcontainer">
-        <img src="/BrasaPerfil.jpg" alt="profile photo" />
+        <img className="aboutImage" src="/BrasaPerfil.jpg" alt="profile photo" />
       </div>
       <div className="text">
         <p>Documentary photographer and filmmaker, Mateo Braselli invites the observer to rediscover the world through his eyes, where he captures the essence of people, focusing on the concept that every individual is unique and irreplaceable. </p>
@@ -16,7 +16,13 @@ const About = () => {
         <br />
         <p>Emphasising the idea that photography is about immortalising moments in time, Braselli shows us that every moment of ones life is unique and special. His work intends to make us conscious of the briefness of life, to always be present in the... </p>
         <br />
-        <p style={{textAlign:'center'}}>NOW.</p>
+        <p style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+         <span> NOW.</span>
+         <br />
+         <br />
+        <img className='unalome' src="/unalome.jpg" alt="unalome" />
+        </p>
+        
       </div>
     </div>
   )
