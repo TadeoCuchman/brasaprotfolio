@@ -49,7 +49,7 @@ const Gallery = ({ photos, setLoading, loading }) => {
   return (
     <div id='gallery'>
       {loading ? <Gif/> : ''}
-        <div style={{ height: '87vh', position: 'relative' }}>
+        <div style={{position: 'relative' }}>
           <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
           <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
         <img id='mainImg' style={loading ? { display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={() => {
