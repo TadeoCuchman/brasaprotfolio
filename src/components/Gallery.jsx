@@ -58,12 +58,12 @@ const Gallery = ({ photos, setLoading, loading }) => {
         <div style={{position: 'relative' }}>
           <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
           <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
-        <img id='mainImg' style={loading ? { minHeigth: '80vh',display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={(e) => {
+        <img id='mainImg'  rel="preconnect" style={loading ? { minHeigth: '80vh',display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={(e) => {
           setLoading(false)
         }} />
       </div>
-      <ul className="imagesList">
-          {photos.map((photo, index) => <img className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name}
+      <ul className="imagesList" style={loading ? {opacity:'0'} : {}}>
+          {photos.map((photo, index) => <img loading="lazy" rel="preconnect" className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name}
             onClick={(e) => {
               if (selectedImg.url !== photo.url) {
 

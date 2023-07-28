@@ -37,7 +37,7 @@ const NewLink = ({ title, setLoading, navigate }) => {
     const [subMenu, setSubMenu] = useState(false)
 
     return (
-        <div style={{ position: 'relative' }}
+        <li style={{ position: 'relative' }}
             onMouseEnter={(e) => {
                 if (title.subpaginas.length > 0) {
                     setSubMenu(true);
@@ -56,9 +56,9 @@ const NewLink = ({ title, setLoading, navigate }) => {
                 }
 
             }}>
-            <li style={subMenu ? { color: 'black' } : {}}>{title.pagina}</li>
+            <div style={subMenu ? { color: 'black' } : {}}>{title.pagina}</div>
             {subMenu ? <SubMenu titles={title.subpaginas} setLoading={setLoading} navigate={navigate} /> : ''}
-        </div>
+        </li>
     )
 }
 
