@@ -48,39 +48,39 @@ const Gallery = ({ photos, setLoading, loading }) => {
   }, [photos])
 
   useEffect(() => {
-      const rect = document.getElementById('mainImg').getBoundingClientRect()
-      window.scrollTo(0, rect.top - 20); 
-  },[loading])
+    const rect = document.getElementById('mainImg').getBoundingClientRect()
+    window.scrollTo(0, rect.top - 20);
+  }, [loading])
 
   return (
-    <div id='gallery'>
-      {loading ? <Gif/> : ''}
-        <div style={{position: 'relative' }}>
-          <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
-          <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
-        <img id='mainImg'  rel="preconnect" style={loading ? { minHeigth: '80vh',display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={(e) => {
+    <div id='gallery' style={{ position: 'relative' }}>
+      <NextButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
+      <BeforeButton photos={photos} setSelectedImg={setSelectedImg} selectedImg={selectedImg} />
+      {loading ? <Gif /> : ''}
+      <div style={{ position: 'relative' }}>
+        <img id='mainImg' rel="preconnect" style={loading ? { minHeigth: '80vh', display: 'none' } : {}} src={selectedImg.url} alt={selectedImg.name} onLoad={(e) => {
           setLoading(false)
         }} />
       </div>
-      <ul className="imagesList" style={loading ? {opacity:'0'} : {}}>
-          {photos.map((photo, index) => <img loading="lazy" rel="preconnect" className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name}
-            onClick={(e) => {
-              if (selectedImg.url !== photo.url) {
+      <ul className="imagesList" style={loading ? { opacity: '0' } : {}}>
+        {photos.map((photo, index) => <img loading="lazy" rel="preconnect" className='littlePhoto noSelected' src={photo.url} lowsrc={photo.url} alt={photo.name} key={photo.name}
+          onClick={(e) => {
+            if (selectedImg.url !== photo.url) {
 
-                let allImages = document.querySelector('.imagesList').children;
-                for (var i = 0; i < allImages.length; i++) {
-                  allImages[i].classList.add('noSelected')
-                }
-
-                e.target.classList.remove('noSelected')
-                changeImage()
-                setTimeout(() => {
-                  setSelectedImg({ url: photo.url, name: photo.name, index: index })
-                }, 400)
+              let allImages = document.querySelector('.imagesList').children;
+              for (var i = 0; i < allImages.length; i++) {
+                allImages[i].classList.add('noSelected')
               }
-            }} />)
-          }
-        </ul>
+
+              e.target.classList.remove('noSelected')
+              changeImage()
+              setTimeout(() => {
+                setSelectedImg({ url: photo.url, name: photo.name, index: index })
+              }, 400)
+            }
+          }} />)
+        }
+      </ul>
     </div>
   )
 };
