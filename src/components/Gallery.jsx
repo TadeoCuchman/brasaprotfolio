@@ -95,7 +95,7 @@ const NextButton = ({ selectedImg, setSelectedImg, photos }) => {
   const nextPhoto = photos[newIndex];
 
   return (
-    <div className="nextButton" style={{ position: 'absolute', width: '50%', height: '100%', right: '0', top: '0', opacity: '0%' }} onClick={() => {
+    <div className="nextButton" style={{ position: 'absolute', width: '50%', height: '100%', right: '0', top: '0', opacity: '0%', zIndex:'100'}} onClick={() => {
       let allImages = document.querySelector('.imagesList').children;
       for (var i = 0; i < allImages.length; i++) {
         allImages[i].classList.add('noSelected');
@@ -119,7 +119,7 @@ const BeforeButton = ({ selectedImg, setSelectedImg, photos }) => {
 
 
   return (
-    <div className="beforeButton" style={{ position: 'absolute', width: '50%', height: '100%', left: '0', top: '0', opacity: '0%' }} onClick={() => {
+    <div className="beforeButton" style={{ position: 'absolute', width: '50%', height: '100%', left: '0', top: '0', opacity: '0%', zIndex:'100' }} onClick={() => {
       let allImages = document.querySelector('.imagesList').children;
       for (var i = 0; i < allImages.length; i++) {
         allImages[i].classList.add('noSelected');
